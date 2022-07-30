@@ -17,13 +17,13 @@ import java.sql.ResultSet;
  *
  * @author jonat
  */
-public class Login extends javax.swing.JFrame {
+public class Recuperacion extends javax.swing.JFrame {
     
     conexionSQL cc=new conexionSQL();
     Connection con=cc.Conexion();
     
     
-    public Login() {
+    public Recuperacion() {
         initComponents();
     }
 
@@ -39,27 +39,19 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtPass = new javax.swing.JPasswordField();
+        txtCod = new javax.swing.JPasswordField();
         btnIngresar = new javax.swing.JButton();
-        txtolvide = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("USUARIO");
+        jLabel1.setText("Ingrese codigo proporcionado");
 
-        jLabel2.setText("CONTRASEÑA");
+        jLabel2.setText("Ingrese usuario");
 
-        btnIngresar.setText("Ingresar");
+        btnIngresar.setText("Restaurar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
-            }
-        });
-
-        txtolvide.setText("Olvidé Contraseña");
-        txtolvide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtolvideActionPerformed(evt);
             }
         });
 
@@ -68,41 +60,36 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCod)
+                            .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel1))
+                        .addGap(42, 42, 42)
+                        .addComponent(btnIngresar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel2))
-                            .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtolvide)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIngresar)
-                    .addComponent(txtolvide))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnIngresar)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,17 +99,11 @@ public class Login extends javax.swing.JFrame {
      validarUsuario();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
-    private void txtolvideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtolvideActionPerformed
-  Recuperacion form=new Recuperacion();
-           form.setVisible(true);
-           this.dispose();
-    }//GEN-LAST:event_txtolvideActionPerformed
-
     public void validarUsuario(){
       int resultado= 0;
-      String pass=String.valueOf(txtPass.getPassword());
+      String cod=String.valueOf(txtCod.getPassword());
       String usuario=txtUsuario.getText();
-      String SQL="select * from usuarios where usuario='"+usuario+"' and pass='"+pass+"'  ";  
+      String SQL="select * from usuarios where usuario='"+usuario+"' and cod='"+cod+"'  ";  
         
       try {
         Statement st=con.createStatement();
@@ -134,14 +115,14 @@ public class Login extends javax.swing.JFrame {
           
           if(resultado ==1) {
            
-           Bienvenido form=new Bienvenido();
+           Usuario form=new Usuario();
            form.setVisible(true);
            this.dispose();
           }
           
           
         }else{
-             JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectos");
+             JOptionPane.showMessageDialog(null, "Error al ingresar");
         }
 
         
@@ -175,21 +156,23 @@ public class Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Recuperacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Recuperacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Recuperacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Recuperacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Recuperacion().setVisible(true);
             }
         });
     }
@@ -198,8 +181,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnIngresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField txtPass;
+    private javax.swing.JPasswordField txtCod;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JButton txtolvide;
     // End of variables declaration//GEN-END:variables
 }
