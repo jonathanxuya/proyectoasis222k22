@@ -6,6 +6,7 @@ package asignacion.vista;
 
 
 
+//import asignacion.datos.MDISistema;
 import asignacion.datos.conexionSQL;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
@@ -134,8 +135,8 @@ public class Login extends javax.swing.JFrame {
           
           if(resultado ==1) {
            
-           Bienvenido form=new Bienvenido();
-           form.setVisible(true);
+           //MDISistema form=new MDISistema (mod);
+        //   form.setVisible(true);
            this.dispose();
           }
           
