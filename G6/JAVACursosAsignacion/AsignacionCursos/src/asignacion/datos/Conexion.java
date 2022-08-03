@@ -18,8 +18,8 @@ public class Conexion {
     
     private final String base = "asignacioncurso2"; 
     private final String user = "root"; 
-    private final String password = "Mariogalaxy9.*"; 
-    private final String url = "jdbc:mysql://localhost:3306/" + base;
+    private final String password = ""; 
+    private final String url = "jdbc:mysql://localhost:3307/" + base;
     private Connection con = null;
     
     public Connection getConexion()
