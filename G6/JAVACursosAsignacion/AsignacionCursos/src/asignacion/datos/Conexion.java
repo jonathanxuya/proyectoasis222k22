@@ -1,46 +1,40 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package asignacion.datos;
 
-import com.sun.jdi.connect.spi.Connection;
-import java.io.IOException;
-import java.sql.*;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
 /**
  *
- * @author Diana
+ * @author jonat
  */
 public class Conexion {
-      // Estas constantes deben cambiarse temporalmente para probarlo localmente
-
-    private static final String JDBC_URL = "jdbc:mysql://localhost/AsignacionCurso";
-    private static final String JDBC_USER = "root";
-    private static final String JDBC_PASS = "";
-
-
-    public static Connection getConnection() throws SQLException {
-        return (Connection) DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
-    }
     
-    public static void close(ResultSet rs){
+    private final String base = "asignacioncurso2"; 
+    private final String user = "root"; 
+    private final String password = "Mariogalaxy9.*"; 
+    private final String url = "jdbc:mysql://localhost:3306/" + base;
+    private Connection con = null;
+    
+    public Connection getConexion()
+    {
         try {
-            rs.close();
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return con; 
     }
+
     
-    public static void close(PreparedStatement stmt){
-        try {
-            stmt.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
-    }
-    
-    public static void close(Connection conn) throws IOException{
-        conn.close();
-    }
+           
 }
