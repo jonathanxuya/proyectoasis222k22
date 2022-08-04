@@ -6,7 +6,7 @@ package asignacion.datos;
 
 /**
  *
- * @author jonat
+ * @author jonathan
  */
 public class usuarios {
     private int id;
